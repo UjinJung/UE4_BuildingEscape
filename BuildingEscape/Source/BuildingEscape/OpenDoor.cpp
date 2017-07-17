@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "OpenDoor.h"
+#include "BuildingEscape.h"
 #include "GameFramework/Actor.h"
-
 
 // Sets default values for this component's properties
 UOpenDoor::UOpenDoor()
@@ -15,12 +15,14 @@ UOpenDoor::UOpenDoor()
 	// ...
 }
 
-
 // Called when the game starts
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
+}
 
+void UOpenDoor::OpenDoor()
+{
 	// Find the owning Actor
 	AActor* Owner = GetOwner();
 
@@ -33,12 +35,15 @@ void UOpenDoor::BeginPlay()
 	Owner->SetActorRotation(NewRotation);
 }
 
-
 // Called every frame
 void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
+	
+	if ((PressurePlate != nullptr) && (ActorThatOpens != nullptr)) {
+		if (PressurePlate->IsOverlappingActor(ActorThatOpens)) {
+			OpenDoor();
+		}
+	}
 }
 
