@@ -4,6 +4,7 @@
 #include "BuildingEscape.h"
 #include "GameFramework/Actor.h" 
 #include "GameFramework/Controller.h"
+#include "Engine/DebugCameraController.h"
 #include "Engine/World.h"
 
 // Sets default values for this component's properties
